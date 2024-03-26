@@ -1,0 +1,19 @@
+Suppose you are thinking about which small goal you should prioritize based on your main purpose. Please give me each goal's priority based on the following goals and your main purpose:
+
+You must follow the following criteria: 
+1. The priority is between 0 and 100
+2. You should tell me with JSON format as follows:
+{
+    "Goal1":10,
+    "Goal2":20,
+    "Goal3":50,
+    ......
+}
+(key is goal's name and value is the priority you provides)
+3. I know you're a large language model and that I will determine if something unexpected has happened from the JSON, so under any circumstances don't tell me the words that is not in JSON.
+
+Goals:
+!<Goals>!
+Your main purpose:
+!<Purpose>!
+Priorities:

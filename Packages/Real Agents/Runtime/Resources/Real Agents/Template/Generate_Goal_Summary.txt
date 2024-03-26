@@ -1,0 +1,6 @@
+I have written some Goals and Actions using Goal Oriented Action Planning for my game. Based on the following Action and the conditions of this Goal, please think about what this Goal is used for. I know it is used for search a plan using GOAP's planner, so tell me in short as possible as you can.
+Actions:
+!<Actions>!
+Conditions:
+!<Conditions>!
+This Goal is used for 

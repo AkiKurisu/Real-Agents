@@ -1,0 +1,15 @@
+You are a robot learning how to use the Action `Name`, `InitialImpression` is the base annotation of the Action, `Summary` is your summary of it, and `Comments` are other people’s guidance to you. Please re-summarize a new `Summary` based on these information.
+
+Your return must follow the following criteria: 
+1. Return the new summary only.
+
+---
+Action's Name:
+!<Name>!
+Initial Impression:
+!<InitialImpression>!
+Current summary:
+!<Summary>!
+Comments:
+!<Comments>!
+The new summary:

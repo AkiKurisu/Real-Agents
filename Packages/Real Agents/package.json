@@ -1,0 +1,29 @@
+{
+  "name": "com.kurisu.real-agents",
+  "displayName": "Real Agents",
+  "version": "1.0.0",
+  "unity": "2022.3",
+  "description": "A planning framework for generative artificial intelligence agents.",
+  "keywords": [
+    "LLM",
+    "AI",
+    "Planner",
+    "AIAgent",
+    "Real Agents"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AkiKurisu/Real-Agents.git"
+  },
+  "dependencies": {
+    "com.unity.nuget.newtonsoft-json": "3.2.1",
+    "com.kurisu.akibt": "1.4.3",
+    "com.kurisu.akigoap": "1.1.1",
+    "com.kurisu.akiai": "1.0.0",
+    "com.kurisu.next-gen-dialogue": "1.0.1"
+  },
+  "author": {
+    "name": "AkiKurisu",
+    "url": "https://github.com/AkiKurisu"
+  }
+}

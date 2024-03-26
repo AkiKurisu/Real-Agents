@@ -1,0 +1,20 @@
+Summarize the Name,Conditions and Effects belong to this action to a natural sentence.
+---
+Name:MakeApplePie
+Conditions:
+{
+    "InKitchen":true,
+    "HaveApple":true
+}
+Effects:
+{
+    "HaveApplePie":true
+}
+Summary:The action "MakeApplePie" need you in the kitchen and have apple, then you can get apple pie as effect.
+---
+Name:!<Name>!
+Conditions:
+!<Conditions>!
+Effects:
+!<Effects>!
+Summary:

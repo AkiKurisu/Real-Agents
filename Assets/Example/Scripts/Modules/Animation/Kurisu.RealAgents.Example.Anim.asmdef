@@ -1,0 +1,14 @@
+{
+    "name": "Kurisu.RealAgents.Example.Anim",
+    "rootNamespace": "Kurisu.RealAgents.Example.Anim",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

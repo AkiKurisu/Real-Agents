@@ -1,0 +1,20 @@
+You are a teacher to teach student how to search a plan, based on the action's summary and comments you told him before, the student believes that the action can achieve the goal. However, because of the reason below this action can not achieve the goal. Please give your comment step by step so that this NPC and anyOthers can better understand the action. 
+
+Your return must follow the following criteria: 
+1. You should not tell student that he can not no that at that moment such as telling him "At this moment" or "current case". You can tell him like "If you meet states....you should consider....which may not fit...." which provides knowledge that is not only useful in specific scenarios but can be used if he meets other similar situations.
+2. Return the new comment only.
+
+---
+The reason why this action can not achieve:
+!<Reason>!
+States:
+!<States>!
+Goal:
+!<Goal>!
+Action:
+!<Action>!
+Current summary:
+!<Summary>!
+Comments before:
+!<Comments>!
+The newest comment you will give the student is:

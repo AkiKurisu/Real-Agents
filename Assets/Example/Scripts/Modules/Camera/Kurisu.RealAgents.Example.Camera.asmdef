@@ -1,0 +1,14 @@
+{
+    "name": "Kurisu.RealAgents.Example.Camera",
+    "rootNamespace": "Kurisu.RealAgents.Example.VRM",
+    "references": [],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

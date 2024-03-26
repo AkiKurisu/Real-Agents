@@ -1,0 +1,475 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77eff6e90efa77848b31d5d488608422, type: 3}
+  m_Name: TourForest
+  m_EditorClassIdentifier: 
+  root:
+    rid: 7882353966743290173
+  blockData: []
+  Description: "\u5728\u68EE\u6797\u5468\u56F4\u91C7\u6837\u4E00\u4E2A\u70B9\u5E76\u79FB\u52A8\uFF08\u5DE1\u903B\uFF09"
+  sharedVariables:
+  - rid: 7882353966743290174
+  - rid: 7882353966743290175
+  - rid: 7882353966743290176
+  - rid: 7882353966743290177
+  - rid: 7882353966743290178
+  - rid: 7882353966743290179
+  - rid: 7882353966743290180
+  references:
+    version: 2
+    RefIds:
+    - rid: 7882353966743290173
+      type: {class: Root, ns: Kurisu.AkiBT, asm: Kurisu.AkiBT}
+      data:
+        graphPosition:
+          serializedVersion: 2
+          x: 400
+          y: 300
+          width: 79
+          height: 77
+        description: 
+        guid: 72c64eca-80fa-4064-9706-f5598eb27ddf
+        child:
+          rid: 7882353966743290181
+    - rid: 7882353966743290174
+      type: {class: SharedObject, ns: Kurisu.AkiBT, asm: Kurisu.AkiBT}
+      data:
+        isShared: 0
+        isGlobal: 1
+        isExposed: 1
+        mName: Agent
+        value: {fileID: 0}
+        constraintTypeAQN: UnityEngine.AI.NavMeshAgent, UnityEngine.AIModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+    - rid: 7882353966743290175
+      type: {class: SharedVector3, ns: Kurisu.AkiBT, asm: Kurisu.AkiBT}
+      data:
+        isShared: 0
+        isGlobal: 0
+        isExposed: 0
+        mName: TourPosition
+        value: {x: 0, y: 0, z: 0}
+    - rid: 7882353966743290176
+      type: {class: SharedObject, ns: Kurisu.AkiBT, asm: Kurisu.AkiBT}
+      data:
+        isShared: 0
+        isGlobal: 1
+        isExposed: 1
+        mName: Forest
+        value: {fileID: 0}
+        constraintTypeAQN: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+    - rid: 7882353966743290177
+      type: {class: SharedVector3, ns: Kurisu.AkiBT, asm: Kurisu.AkiBT}
+      data:
+        isShared: 0
+        isGlobal: 0
+        isExposed: 0
+        mName: MyPosition
+        value: {x: 0, y: 0, z: 0}
+    - rid: 7882353966743290178
+      type: {class: SharedVector3, ns: Kurisu.AkiBT, asm: Kurisu.AkiBT}
+      data:
+        isShared: 0
+        isGlobal: 0
+        isExposed: 0
+        mName: Substract
+        value: {x: 0, y: 0, z: 0}
+    - rid: 7882353966743290179
+      type: {class: SharedFloat, ns: Kurisu.AkiBT, asm: Kurisu.AkiBT}
+      data:
+        isShared: 0
+        isGlobal: 0
+        isExposed: 0
+        mName: Sqr
+        value: 0
+    - rid: 7882353966743290180
+      type: {class: SharedBool, ns: Kurisu.AkiBT, asm: Kurisu.AkiBT}
+      data:
+        isShared: 0
+        isGlobal: 0
+        isExposed: 0
+        mName: HasPoint
+        value: 0
+    - rid: 7882353966743290181
+      type: {class: Sequence, ns: Kurisu.AkiBT, asm: Kurisu.AkiBT}
+      data:
+        graphPosition:
+          serializedVersion: 2
+          x: 531
+          y: 260
+          width: 173
+          height: 162
+        description: 
+        guid: 3a90af30-9556-42b3-98ce-185e7138def1
+        children:
+        - rid: 7882353966743290182
+        - rid: 7882353966743290183
+        - rid: 7882353966743290184
+        abortOnConditionChanged: 0
+    - rid: 7882353966743290182
+      type: {class: ReturnSuccess, ns: Kurisu.AkiBT.Extend, asm: Kurisu.AkiBT}
+      data:
+        graphPosition:
+          serializedVersion: 2
+          x: 754
+          y: -303
+          width: 153
+          height: 96
+        description: 
+        guid: 2941bf0d-5ec5-40b2-a242-67d6dbb5effd
+        child:
+          rid: 7882353966743290185
+    - rid: 7882353966743290183
+      type: {class: Sequence, ns: Kurisu.AkiBT, asm: Kurisu.AkiBT}
+      data:
+        graphPosition:
+          serializedVersion: 2
+          x: 754
+          y: 155
+          width: 173
+          height: 162
+        description: 
+        guid: eca48dc8-a1b5-43e7-a485-fdde07a3f1d4
+        children:
+        - rid: 7882353966743290186
+        - rid: 7882353966743290187
+        - rid: 7882353966743290188
+        abortOnConditionChanged: 0
+    - rid: 7882353966743290184
+      type: {class: Selector, ns: Kurisu.AkiBT, asm: Kurisu.AkiBT}
+      data:
+        graphPosition:
+          serializedVersion: 2
+          x: 754
+          y: 846
+          width: 173
+          height: 138
+        description: 
+        guid: 5a91c0b3-752e-4084-bff7-bf892006db67
+        children:
+        - rid: 7882353966743290189
+        - rid: 7882353966743290190
+        abortOnConditionChanged: 0
+    - rid: 7882353966743290185
+      type: {class: BoolComparison, ns: Kurisu.AkiBT.Extend, asm: Kurisu.AkiBT}
+      data:
+        graphPosition:
+          serializedVersion: 2
+          x: 957
+          y: -359
+          width: 238
+          height: 208
+        description: 
+        guid: b37c59c6-bfee-463a-a9dd-45be6163f1a3
+        evaluateOnRunning: 0
+        child:
+          rid: 7882353966743290191
+        bool1:
+          isShared: 1
+          isGlobal: 0
+          isExposed: 0
+          mName: HasPoint
+          value: 0
+        bool2:
+          isShared: 0
+          isGlobal: 0
+          isExposed: 0
+          mName: 
+          value: 0
+        operation: 0
+    - rid: 7882353966743290186
+      type: {class: TransformGetPosition, ns: Kurisu.AkiBT.Extend, asm: Kurisu.AkiBT}
+      data:
+        graphPosition:
+          serializedVersion: 2
+          x: 977
+          y: -101
+          width: 237
+          height: 172
+        description: 
+        guid: 7ec15144-9011-4683-a624-c8381ec97c3a
+        target:
+          isShared: 0
+          isGlobal: 0
+          isExposed: 0
+          mName: 
+          value: {fileID: 0}
+        storeResult:
+          isShared: 1
+          isGlobal: 0
+          isExposed: 0
+          mName: MyPosition
+          value: {x: 0, y: 0, z: 0}
+    - rid: 7882353966743290187
+      type: {class: Vector3Operator, ns: Kurisu.AkiBT.Extend, asm: Kurisu.AkiBT}
+      data:
+        graphPosition:
+          serializedVersion: 2
+          x: 977
+          y: 121
+          width: 276
+          height: 230
+        description: 
+        guid: d22b8127-e9ef-4e37-9c7e-efd6b6f2617e
+        operation: 1
+        firstVector3:
+          isShared: 1
+          isGlobal: 0
+          isExposed: 0
+          mName: MyPosition
+          value: {x: 0, y: 0, z: 0}
+        secondVector3:
+          isShared: 1
+          isGlobal: 0
+          isExposed: 0
+          mName: TourPosition
+          value: {x: 0, y: 0, z: 0}
+        storeResult:
+          isShared: 1
+          isGlobal: 0
+          isExposed: 0
+          mName: Substract
+          value: {x: 0, y: 0, z: 0}
+    - rid: 7882353966743290188
+      type: {class: Vector3GetSqrMagnitude, ns: Kurisu.AkiBT.Extend, asm: Kurisu.AkiBT}
+      data:
+        graphPosition:
+          serializedVersion: 2
+          x: 977
+          y: 401
+          width: 261
+          height: 172
+        description: 
+        guid: f57128e1-6077-42a7-83ea-8dfd025f82d4
+        vector3:
+          isShared: 1
+          isGlobal: 0
+          isExposed: 0
+          mName: Substract
+          value: {x: 0, y: 0, z: 0}
+        result:
+          isShared: 1
+          isGlobal: 0
+          isExposed: 0
+          mName: Sqr
+          value: 0
+    - rid: 7882353966743290189
+      type: {class: FloatComparison, ns: Kurisu.AkiBT.Extend, asm: Kurisu.AkiBT}
+      data:
+        graphPosition:
+          serializedVersion: 2
+          x: 977
+          y: 623
+          width: 229
+          height: 209
+        description: 
+        guid: 8c215650-65b9-4f0c-a0c1-432f5561c519
+        evaluateOnRunning: 0
+        child:
+          rid: 7882353966743290192
+        float1:
+          isShared: 1
+          isGlobal: 0
+          isExposed: 0
+          mName: Sqr
+          value: 0
+        float2:
+          isShared: 0
+          isGlobal: 0
+          isExposed: 0
+          mName: 
+          value: 1
+        operation: 0
+    - rid: 7882353966743290190
+      type: {class: Sequence, ns: Kurisu.AkiBT, asm: Kurisu.AkiBT}
+      data:
+        graphPosition:
+          serializedVersion: 2
+          x: 977
+          y: 1094
+          width: 173
+          height: 114
+        description: 
+        guid: cc446e79-16c1-4ae6-9431-66f4f1021c58
+        children:
+        - rid: 7882353966743290193
+        abortOnConditionChanged: 0
+    - rid: 7882353966743290191
+      type: {class: Sequence, ns: Kurisu.AkiBT, asm: Kurisu.AkiBT}
+      data:
+        graphPosition:
+          serializedVersion: 2
+          x: 1245
+          y: -324
+          width: 173
+          height: 138
+        description: 
+        guid: b75f2978-23c9-480a-b1a9-ed92fccf1ce7
+        children:
+        - rid: 7882353966743290194
+        - rid: 7882353966743290195
+        abortOnConditionChanged: 0
+    - rid: 7882353966743290192
+      type: {class: Sequence, ns: Kurisu.AkiBT, asm: Kurisu.AkiBT}
+      data:
+        graphPosition:
+          serializedVersion: 2
+          x: 1256
+          y: 646
+          width: 173
+          height: 162
+        description: 
+        guid: e266e988-4090-4e98-82b9-ecd5b69d81c7
+        children:
+        - rid: 7882353966743290196
+        - rid: 7882353966743290197
+        - rid: 7882353966743290198
+        abortOnConditionChanged: 0
+    - rid: 7882353966743290193
+      type: {class: NavmeshSetDestination, ns: Kurisu.AkiBT.Extend, asm: Kurisu.AkiBT}
+      data:
+        graphPosition:
+          serializedVersion: 2
+          x: 1200
+          y: 1065
+          width: 287
+          height: 172
+        description: 
+        guid: 9d374f6c-f231-4c2c-8779-96dc7081ae62
+        agent:
+          isShared: 1
+          isGlobal: 0
+          isExposed: 0
+          mName: Agent
+          value: {fileID: 0}
+        destination:
+          isShared: 1
+          isGlobal: 0
+          isExposed: 0
+          mName: TourPosition
+          value: {x: 0, y: 0, z: 0}
+    - rid: 7882353966743290194
+      type: {class: SamplePosition, ns: Kurisu.RealAgents.Example, asm: Kurisu.RealAgents.Example}
+      data:
+        graphPosition:
+          serializedVersion: 2
+          x: 1468
+          y: -470
+          width: 260
+          height: 209
+        description: 
+        guid: 86bdfd5e-69bd-4dd0-95a6-772ab443a473
+        centerTransform:
+          isShared: 1
+          isGlobal: 0
+          isExposed: 0
+          mName: Forest
+          value: {fileID: 0}
+        radius:
+          isShared: 0
+          isGlobal: 0
+          isExposed: 0
+          mName: 
+          value: 10
+        storeResult:
+          isShared: 1
+          isGlobal: 0
+          isExposed: 0
+          mName: TourPosition
+          value: {x: 0, y: 0, z: 0}
+    - rid: 7882353966743290195
+      type: {class: SetBool, ns: Kurisu.AkiBT.Extend, asm: Kurisu.AkiBT}
+      data:
+        graphPosition:
+          serializedVersion: 2
+          x: 1468
+          y: -211
+          width: 186
+          height: 170
+        description: 
+        guid: e4abad3a-e7d2-40ee-b9c6-1d446c1b2922
+        boolValue:
+          isShared: 0
+          isGlobal: 0
+          isExposed: 0
+          mName: 
+          value: 1
+        storeResult:
+          isShared: 1
+          isGlobal: 0
+          isExposed: 0
+          mName: HasPoint
+          value: 0
+    - rid: 7882353966743290196
+      type: {class: SetBool, ns: Kurisu.AkiBT.Extend, asm: Kurisu.AkiBT}
+      data:
+        graphPosition:
+          serializedVersion: 2
+          x: 1479
+          y: 440
+          width: 186
+          height: 170
+        description: 
+        guid: 2daadf51-4cea-4a6a-8217-8563b02dd7ef
+        boolValue:
+          isShared: 0
+          isGlobal: 0
+          isExposed: 0
+          mName: HasPoint
+          value: 0
+        storeResult:
+          isShared: 1
+          isGlobal: 0
+          isExposed: 0
+          mName: HasPoint
+          value: 0
+    - rid: 7882353966743290197
+      type: {class: NavmeshSetDestination, ns: Kurisu.AkiBT.Extend, asm: Kurisu.AkiBT}
+      data:
+        graphPosition:
+          serializedVersion: 2
+          x: 1479
+          y: 660
+          width: 287
+          height: 172
+        description: 
+        guid: 33066a1d-7757-4557-aa16-5ba1e3109f4e
+        agent:
+          isShared: 1
+          isGlobal: 0
+          isExposed: 0
+          mName: Agent
+          value: {fileID: 0}
+        destination:
+          isShared: 1
+          isGlobal: 0
+          isExposed: 0
+          mName: MyPosition
+          value: {x: 0, y: 0, z: 0}
+    - rid: 7882353966743290198
+      type: {class: TimeWait, ns: Kurisu.AkiBT.Extend, asm: Kurisu.AkiBT}
+      data:
+        graphPosition:
+          serializedVersion: 2
+          x: 1479
+          y: 882
+          width: 186
+          height: 133
+        description: 
+        guid: d7acef80-28f2-475e-ba07-83f01b3bd165
+        waitTime:
+          isShared: 0
+          isGlobal: 0
+          isExposed: 0
+          mName: 
+          value: 5

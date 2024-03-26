@@ -1,0 +1,5 @@
+解包所有重打包的.unitypackage文件。
+如果没有购买许可证，你不应使用这些资产用于商业用途。
+
+Unpack all minimized-repacked .unitypackage files.
+You should not use these files for commercial use without paid license.

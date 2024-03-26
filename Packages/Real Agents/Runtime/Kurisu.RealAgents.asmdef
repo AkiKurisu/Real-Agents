@@ -1,0 +1,20 @@
+{
+    "name": "Kurisu.RealAgents",
+    "rootNamespace": "Kurisu.RealAgents",
+    "references": [
+        "GUID:bf89a8bf6625fad4eb6879c01e73541d",
+        "GUID:41ce47af1d69c28458bf06fdc18c263d",
+        "GUID:9468b0f290541f649a4b8e65539d0f47",
+        "GUID:a3641cccf50efcd4cafc57a3120fb40e",
+        "GUID:e8437be54f9284140b88a0f167fad164"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

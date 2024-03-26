@@ -1,0 +1,103 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba4da3361a96c7646947c4518c7ad8d1, type: 3}
+  m_Name: Dancer
+  m_EditorClassIdentifier: 
+  behaviors:
+  - rid: 7882353966743290093
+  - rid: 7882353966743290094
+  - rid: 7882353966743290095
+  - rid: 7882353966743290096
+  - rid: 7882353966743290097
+  - rid: 7882353966743290098
+  - rid: 7882353966743290099
+  - rid: 7882353966743290100
+  - rid: 7882353966743290101
+  - rid: 7882353966743290102
+  - rid: 7882353966743290103
+  - rid: 7882353966743290104
+  - rid: 7882353966743290105
+  Description: "\u5DE5\u4F5C\uFF1A\u8DF3\u821E"
+  sharedDataSet: {fileID: 11400000, guid: ae0a94f2eab34af4496fb93a138ad897, type: 2}
+  references:
+    version: 2
+    RefIds:
+    - rid: 7882353966743290093
+      type: {class: NotHungry, ns: Kurisu.RealAgents.Example, asm: Kurisu.RealAgents.Example}
+      data:
+        guid: cc08c9f5-f280-4dca-8b1a-62d112186a33
+        selfDescription: 
+    - rid: 7882353966743290094
+      type: {class: HasEnergy, ns: Kurisu.RealAgents.Example, asm: Kurisu.RealAgents.Example}
+      data:
+        guid: 07cd36da-6a93-406d-ac71-4af5eef47a58
+        selfDescription: 
+        energyLossTickTime: 0.4
+    - rid: 7882353966743290095
+      type: {class: NotThirsty, ns: Kurisu.RealAgents.Example, asm: Kurisu.RealAgents.Example}
+      data:
+        guid: b7cfb67f-0d31-4ce0-8792-820dac26c39e
+        selfDescription: 
+    - rid: 7882353966743290096
+      type: {class: AtWork, ns: Kurisu.RealAgents.Example, asm: Kurisu.RealAgents.Example}
+      data:
+        guid: 35a3f554-8ccb-40fa-bf0c-a40ce4f7a975
+        selfDescription: 
+    - rid: 7882353966743290097
+      type: {class: BeHappy, ns: Kurisu.RealAgents.Example, asm: Kurisu.RealAgents.Example}
+      data:
+        guid: fe199eac-143e-4666-a3aa-b0dd17b8eaa7
+        selfDescription: 
+    - rid: 7882353966743290098
+      type: {class: Cook, ns: Kurisu.RealAgents.Example, asm: Kurisu.RealAgents.Example}
+      data:
+        guid: 3823d056-e7e9-48cd-92f3-738c1e75e956
+        selfDescription: 
+        cookTime: 5
+    - rid: 7882353966743290099
+      type: {class: Eat, ns: Kurisu.RealAgents.Example, asm: Kurisu.RealAgents.Example}
+      data:
+        guid: 8f15d82a-4ec8-4b8b-9049-6c59899370c4
+        selfDescription: 
+    - rid: 7882353966743290100
+      type: {class: Dance, ns: Kurisu.RealAgents.Example, asm: Kurisu.RealAgents.Example}
+      data:
+        guid: 9d0013c6-b62d-4459-b394-0df24c39698b
+        selfDescription: 
+    - rid: 7882353966743290101
+      type: {class: RestAtHome, ns: Kurisu.RealAgents.Example, asm: Kurisu.RealAgents.Example}
+      data:
+        guid: 8c81d0b0-db59-4ca3-a644-1db1e10e715c
+        selfDescription: 
+        waitTime: 5
+    - rid: 7882353966743290102
+      type: {class: BuyIngredient, ns: Kurisu.RealAgents.Example, asm: Kurisu.RealAgents.Example}
+      data:
+        guid: c8a849af-6a12-4e61-a195-63e8a45a6a58
+        selfDescription: 
+        buyCount: 5
+    - rid: 7882353966743290103
+      type: {class: Drink, ns: Kurisu.RealAgents.Example, asm: Kurisu.RealAgents.Example}
+      data:
+        guid: 964268c9-4136-446e-b78d-c437666b82b3
+        selfDescription: 
+    - rid: 7882353966743290104
+      type: {class: FetchWater, ns: Kurisu.RealAgents.Example, asm: Kurisu.RealAgents.Example}
+      data:
+        guid: d2f06114-322d-4401-bdac-be07dc66b7d4
+        selfDescription: 
+        fetchTime: 5
+    - rid: 7882353966743290105
+      type: {class: TourForest, ns: Kurisu.RealAgents.Example, asm: Kurisu.RealAgents.Example}
+      data:
+        guid: 6918cc51-38a7-435b-954b-1a1d1595cfb9
+        selfDescription: 

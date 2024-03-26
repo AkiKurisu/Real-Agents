@@ -1,0 +1,20 @@
+Find the sequence of actions that will accomplish your goal according to the actions' description and current states, return as an array.
+
+I will give you the following information:
+
+Can use Actions:!<Actions>!
+Your current States:!<States>!
+Your current Goal is:!<Goal>!
+
+You must follow the following criteria: 
+1. You should tell me in array format.
+```
+["A","B","C"]
+```
+```
+["GoToMarket","BuyApple","BuyBread"]
+```
+```
+["GoToSchool","Study","DoHomework"]
+```
+```

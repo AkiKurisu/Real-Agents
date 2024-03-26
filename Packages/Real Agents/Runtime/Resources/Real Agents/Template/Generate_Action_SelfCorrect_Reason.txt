@@ -1,0 +1,11 @@
+This is a plan derived using the Goal Oriented Action Planning based on the following states and information about each Action. Please think about why the !<Index>! Action is !<Right>! instead of !<Wrong>!.
+---
+States:
+!<States>!
+Goal:
+!<Goal>!
+Actions:
+!<Actions>!
+Plan:
+!<Plan>!
+The reason:

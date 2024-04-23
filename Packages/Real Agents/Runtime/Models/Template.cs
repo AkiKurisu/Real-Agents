@@ -38,10 +38,6 @@ namespace Kurisu.RealAgents
             }
             return output;
         }
-        public string Get()
-        {
-            return templateText;
-        }
     }
     public class GenerateActionSummaryTemplate : Template
     {

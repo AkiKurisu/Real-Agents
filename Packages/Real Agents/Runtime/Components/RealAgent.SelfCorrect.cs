@@ -1,6 +1,6 @@
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 namespace Kurisu.RealAgents
 {
@@ -16,7 +16,7 @@ namespace Kurisu.RealAgents
             reflectTemplate = new("Generate_Action_SelfCorrect_Reflect");
         }
         #region  Plan Evaluation
-        private async Task<bool> EvaluatePlan(InferenceContext evaluateContext)
+        private async UniTask<bool> EvaluatePlan(InferenceContext evaluateContext)
         {
             for (int i = 0; i < Mathf.Min(evaluateContext.ProceduralPlan.Count, evaluateContext.Tasks.Count); ++i)
             {
@@ -33,7 +33,7 @@ namespace Kurisu.RealAgents
         }
         #endregion
         #region  Precondition Evaluation
-        private async Task<bool> EvaluatePrecondition(InferenceContext evaluateContext)
+        private async UniTask<bool> EvaluatePrecondition(InferenceContext evaluateContext)
         {
             var action = evaluateContext.Tasks[0].Action;
             if (!action.PreconditionsSatisfied(evaluateContext.StateCache))
@@ -60,10 +60,10 @@ namespace Kurisu.RealAgents
         /// <param name="index"></param>
         /// <param name="evaluateContext"></param>
         /// <returns></returns>
-        private async Task<string> GenerateReason(int index, InferenceContext evaluateContext)
+        private async UniTask<string> GenerateReason(int index, InferenceContext evaluateContext)
         {
             LogStatus($"Generate a reason for while select {evaluateContext.ProceduralPlan[index].Name} instead of {evaluateContext.Tasks[index].Action.Name}");
-            var reason = await gptAgent.Inference(reasonTemplate.Get(new()
+            var response = await openAIClient.GenerateAsync(reasonTemplate.Get(new()
             {
                 {"Actions",GetActionsMemoryMessage()},
                 {"States",evaluateContext.StateCache.ToDictionary() },
@@ -73,8 +73,8 @@ namespace Kurisu.RealAgents
                 {"Wrong",evaluateContext.ProceduralPlan[index].Name},
                 {"Right",evaluateContext.Tasks[index].Action.Name}
             }), ct.Token);
-            Log($"Get reason: {reason}");
-            return reason;
+            Log($"Get reason: {response.Response}");
+            return response.Response;
         }
         /// <summary>
         /// Call gpt to generate a comment for an action as short-term self correct
@@ -83,7 +83,7 @@ namespace Kurisu.RealAgents
         /// <param name="actionName"></param>
         /// <param name="evaluateContext"></param>
         /// <returns></returns> <summary>
-        private async Task GenerateComment(string reason, string actionName, InferenceContext evaluateContext)
+        private async UniTask GenerateComment(string reason, string actionName, InferenceContext evaluateContext)
         {
             LogStatus($"Generate a comment for {actionName}");
             if (!Memory.TryGetActionMemory(actionName, out var memory))
@@ -91,8 +91,7 @@ namespace Kurisu.RealAgents
                 LogError($"Action {actionName} not existed in agent memory");
                 return;
             }
-            string input;
-            var result = await gptAgent.Inference(input = commentTemplate.Get(new()
+            var result = await openAIClient.GenerateAsync(commentTemplate.Get(new()
             {
                 {"Reason",reason },
                 {"States",evaluateContext.StateCache.ToDictionary() },
@@ -101,34 +100,30 @@ namespace Kurisu.RealAgents
                 {"Summary",memory.Summary},
                 {"Comments",memory.Comments}
             }), ct.Token);
-            memory.AddComment(result);
-            planGenerator.SetHistory(input, result);
-            Log($"Get comment: {result}");
+            memory.AddComment(result.Response);
+            Log($"Get comment: {result.Response}");
             if (memory.CanReflect())
             {
                 await GenerateReflect(memory);
             }
             //Temporarily call after generating comment which means dataBase should update
             SaveMemory();
-            if (PlanGeneratorMode == PlanGeneratorMode.Embedding)
-            {
-                await PersistEmbedding();
-            }
         }
         /// <summary>
         /// Call gpt to reflect for long-term self correct
         /// </summary>
         /// <param name="memory"></param>
         /// <returns></returns>
-        private async Task GenerateReflect(ActionMemory memory)
+        private async UniTask GenerateReflect(ActionMemory memory)
         {
-            memory.Overwrite(await gptAgent.Inference(reflectTemplate.Get(new()
+            var response = await openAIClient.GenerateAsync(reflectTemplate.Get(new()
             {
                 {"Name",memory.Name},
                 {"InitialImpression",memory.InitialImpression},
                 {"Summary",memory.Summary},
                 {"Comments",memory.Comments}
-            }), ct.Token));
+            }), ct.Token);
+            memory.Overwrite(response.Response);
         }
     }
 }

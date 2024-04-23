@@ -2,6 +2,8 @@
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
+using Kurisu.UniChat;
 using UnityEditor;
 using UnityEngine;
 namespace Kurisu.RealAgents.Editor
@@ -11,11 +13,11 @@ namespace Kurisu.RealAgents.Editor
         [MenuItem("Tools/Real Agents/API Test")]
         private static async void APITest()
         {
-            var agent = new GPTEditorService().CreateGPTAgent();
+            var client = new GPTEditorService().CreateOpenAIClient();
             const int maxWaitSeconds = 30;
             float startVal = (float)EditorApplication.timeSinceStartup;
             var ct = new CancellationTokenSource();
-            Task<string> task = agent.Inference("Hello, my friend!", default);
+            Task<ILLMResponse> task = client.GenerateAsync("Hello, my friend!", default).AsTask();
             while (!task.IsCompleted)
             {
                 float slider = (float)(EditorApplication.timeSinceStartup - startVal) / maxWaitSeconds;
@@ -30,9 +32,9 @@ namespace Kurisu.RealAgents.Editor
                 await Task.Yield();
             }
             EditorUtility.ClearProgressBar();
-            if (!string.IsNullOrEmpty(task.Result))
+            if (task.Result.Status)
             {
-                Debug.Log(task.Result);
+                Debug.Log(task.Result.Response);
                 Debug.Log("Test succeed, ChatGPT api can use");
             }
             else

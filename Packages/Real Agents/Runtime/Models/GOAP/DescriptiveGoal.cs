@@ -1,9 +1,9 @@
 using System.IO;
 using System.Threading;
-using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using Kurisu.AkiAI;
 using Kurisu.GOAP;
-using Kurisu.NGDS.AI;
+using Kurisu.UniChat;
 using Newtonsoft.Json;
 using UnityEngine;
 namespace Kurisu.RealAgents
@@ -18,10 +18,10 @@ namespace Kurisu.RealAgents
             template = null;
         }
         private static GenerateGoalSummaryTemplate template;
-        public async Task DoSelfDescription(string actions, GPTAgent agent, CancellationToken ct)
+        public async UniTask DoSelfDescription(string actions, ILargeLanguageModel llm, CancellationToken ct)
         {
             template ??= new();
-            selfDescription = await agent.Inference(template.Get(actions, Conditions), ct);
+            selfDescription = (await llm.GenerateAsync(template.Get(actions, Conditions), ct)).Response;
         }
 
         public void VirtualInitialize(WorldState worldState)

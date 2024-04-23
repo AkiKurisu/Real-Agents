@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
-using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using Kurisu.GOAP;
 using Newtonsoft.Json;
 using UnityEngine;
@@ -21,7 +21,7 @@ namespace Kurisu.RealAgents
         {
             return Behaviors.OfType<DescriptiveGoal>().ToArray();
         }
-        public async Task DoSelfDescription(IGPTService service, CancellationToken ct)
+        public async UniTask DoSelfDescription(IClientService service, CancellationToken ct)
         {
             DescriptiveAction.CleanUp();
             DescriptiveGoal.CleanUp();
@@ -45,15 +45,15 @@ namespace Kurisu.RealAgents
                 DestroyImmediate(gameObject);
             }
         }
-        private async Task GenerateActionDescription(WorldState worldState, IGPTService service, CancellationToken ct)
+        private async UniTask GenerateActionDescription(WorldState worldState, IClientService service, CancellationToken ct)
         {
-            List<Task> tasks = new();
+            List<UniTask> tasks = new();
             foreach (var behavior in GetDescriptiveActions())
             {
                 behavior.VirtualInitialize(worldState);
                 try
                 {
-                    var agent = service.CreateGPTAgent();
+                    var agent = service.CreateOpenAIClient();
                     if (string.IsNullOrEmpty(behavior.SelfDescription))
                     {
                         if (sharedDataSet && sharedDataSet.TryGetDescription(behavior.Name, out var description))
@@ -72,16 +72,16 @@ namespace Kurisu.RealAgents
                 }
                 if (tasks.Count >= 5)
                 {
-                    await Task.WhenAll(tasks);
+                    await UniTask.WhenAll(tasks);
                     tasks.Clear();
                 }
             }
             if (tasks.Count > 0)
-                await Task.WhenAll(tasks);
+                await UniTask.WhenAll(tasks);
         }
-        private async Task GenerateGoalDescription(WorldState worldState, IGPTService service, CancellationToken ct)
+        private async UniTask GenerateGoalDescription(WorldState worldState, IClientService service, CancellationToken ct)
         {
-            List<Task> tasks = new();
+            List<UniTask> tasks = new();
             var dictionary = new Dictionary<string, string>();
             foreach (var action in GetDescriptiveActions())
             {
@@ -93,7 +93,7 @@ namespace Kurisu.RealAgents
                 behavior.VirtualInitialize(worldState);
                 try
                 {
-                    var agent = service.CreateGPTAgent();
+                    var agent = service.CreateOpenAIClient();
                     if (string.IsNullOrEmpty(behavior.SelfDescription))
                     {
                         if (sharedDataSet && sharedDataSet.TryGetDescription(behavior.Name, out var description))
@@ -112,12 +112,12 @@ namespace Kurisu.RealAgents
                 }
                 if (tasks.Count >= 5)
                 {
-                    await Task.WhenAll(tasks);
+                    await UniTask.WhenAll(tasks);
                     tasks.Clear();
                 }
             }
             if (tasks.Count > 0)
-                await Task.WhenAll(tasks);
+                await UniTask.WhenAll(tasks);
         }
         public bool TryGetDescription(string behaviorName, out string selfDescription)
         {

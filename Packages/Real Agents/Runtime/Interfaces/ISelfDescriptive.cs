@@ -1,5 +1,5 @@
 using System.Threading;
-using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using Kurisu.GOAP;
 namespace Kurisu.RealAgents
 {
@@ -18,6 +18,6 @@ namespace Kurisu.RealAgents
     }
     public interface ISelfDescriptiveSet
     {
-        Task DoSelfDescription(IGPTService service, CancellationToken ct);
+        UniTask DoSelfDescription(IClientService service, CancellationToken ct);
     }
 }

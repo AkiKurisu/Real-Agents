@@ -1,19 +1,17 @@
-using Kurisu.NGDS.AI;
+
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Kurisu.UniChat.LLMs;
 namespace Kurisu.RealAgents.Editor
 {
     public class RealAgentsSetting : ScriptableObject
     {
-        private const string k_SettingsPath = "Assets/Real Agents Setting.asset";
-        private const string k_AITurboSettingsPath = "Assets/AI Turbo Setting.asset";
+        private const string k_RealAgentsSettingsPath = "Assets/Real Agents Setting.asset";
+        private const string k_LLMSettingsPath = "Assets/LLM Settings.asset";
         [SerializeField]
-        private GPTModel editorGPTModel;
-        public GPTModel EditorGPTModel => editorGPTModel;
-        [SerializeField]
-        private AITurboSetting aiTurboSetting;
-        public AITurboSetting AITurboSetting => aiTurboSetting;
+        private LLMSettingsAsset llmSettings;
+        public LLMSettingsAsset LLMSettings => llmSettings;
         public static RealAgentsSetting GetOrCreateSettings()
         {
             var guids = AssetDatabase.FindAssets($"t:{nameof(RealAgentsSetting)}");
@@ -21,29 +19,29 @@ namespace Kurisu.RealAgents.Editor
             if (guids.Length == 0)
             {
                 setting = CreateInstance<RealAgentsSetting>();
-                Debug.Log($"Next Gen Dialogue Setting saving path : {k_SettingsPath}");
-                AssetDatabase.CreateAsset(setting, k_SettingsPath);
+                Debug.Log($"Real Agents Setting saving path : {k_RealAgentsSettingsPath}");
+                AssetDatabase.CreateAsset(setting, k_RealAgentsSettingsPath);
                 AssetDatabase.SaveAssets();
             }
             else setting = AssetDatabase.LoadAssetAtPath<RealAgentsSetting>(AssetDatabase.GUIDToAssetPath(guids[0]));
-            if (setting.aiTurboSetting == null)
+            if (setting.llmSettings == null)
             {
-                setting.aiTurboSetting = GetOrCreateAITurboSetting();
+                setting.llmSettings = GetOrCreateAITurboSetting();
             }
             return setting;
         }
-        private static AITurboSetting GetOrCreateAITurboSetting()
+        private static LLMSettingsAsset GetOrCreateAITurboSetting()
         {
-            var guids = AssetDatabase.FindAssets($"t:{nameof(AITurboSetting)}");
-            AITurboSetting setting;
+            var guids = AssetDatabase.FindAssets($"t:{nameof(LLMSettings)}");
+            LLMSettingsAsset setting;
             if (guids.Length == 0)
             {
-                setting = CreateInstance<AITurboSetting>();
-                Debug.Log($"AI Turbo Setting saving path : {k_AITurboSettingsPath}");
-                AssetDatabase.CreateAsset(setting, k_AITurboSettingsPath);
+                setting = CreateInstance<LLMSettingsAsset>();
+                Debug.Log($"LLM Settings saving path : {k_LLMSettingsPath}");
+                AssetDatabase.CreateAsset(setting, k_LLMSettingsPath);
                 AssetDatabase.SaveAssets();
             }
-            else setting = AssetDatabase.LoadAssetAtPath<AITurboSetting>(AssetDatabase.GUIDToAssetPath(guids[0]));
+            else setting = AssetDatabase.LoadAssetAtPath<LLMSettingsAsset>(AssetDatabase.GUIDToAssetPath(guids[0]));
             return setting;
         }
 
@@ -58,8 +56,7 @@ namespace Kurisu.RealAgents.Editor
         private SerializedObject m_Settings;
         private class Styles
         {
-            public static GUIContent EditorGPTModelStyle = new("Editor GPT Model");
-            public static GUIContent AITurboSettingStyle = new("AI Turbo Setting");
+            public static GUIContent LLMSettingStyle = new("Settings Asset");
         }
         public RealAgentsSettingsProvider(string path, SettingsScope scope = SettingsScope.User) : base(path, scope) { }
         public override void OnActivate(string searchContext, VisualElement rootElement)
@@ -68,14 +65,10 @@ namespace Kurisu.RealAgents.Editor
         }
         public override void OnGUI(string searchContext)
         {
-            GUILayout.BeginVertical("Editor Settings", GUI.skin.box);
+            GUILayout.BeginVertical("Editor LLM Settings", GUI.skin.box);
+            var turboSetting = m_Settings.FindProperty("llmSettings");
             GUILayout.Space(EditorGUIUtility.singleLineHeight);
-            EditorGUILayout.PropertyField(m_Settings.FindProperty("editorGPTModel"), Styles.EditorGPTModelStyle);
-            GUILayout.EndVertical();
-            GUILayout.BeginVertical("Runtime Settings", GUI.skin.box);
-            var turboSetting = m_Settings.FindProperty("aiTurboSetting");
-            GUILayout.Space(EditorGUIUtility.singleLineHeight);
-            EditorGUILayout.PropertyField(turboSetting, Styles.AITurboSettingStyle);
+            EditorGUILayout.PropertyField(turboSetting, Styles.LLMSettingStyle);
             if (turboSetting.objectReferenceValue != null)
             {
                 var obj = new SerializedObject(turboSetting.objectReferenceValue);

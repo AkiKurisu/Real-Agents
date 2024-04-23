@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using Kurisu.GOAP;
 using Kurisu.GOAP.Editor;
 using UnityEditor;
@@ -128,7 +129,7 @@ namespace Kurisu.RealAgents.Editor
             const int maxWaitSeconds = 30;
             float startVal = (float)EditorApplication.timeSinceStartup;
             var ct = new CancellationTokenSource();
-            Task task = (graphView.Set as ISelfDescriptiveSet).DoSelfDescription(new GPTEditorService(), ct.Token);
+            Task task = (graphView.Set as ISelfDescriptiveSet).DoSelfDescription(new GPTEditorService(), ct.Token).AsTask();
             bool failed = false;
             while (!task.IsCompleted)
             {

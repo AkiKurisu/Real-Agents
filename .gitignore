@@ -77,3 +77,5 @@ crashlytics-build.properties
 /[Aa]ssets/Example/Art/PolygonFantasyKingdom
 /[Aa]ssets/Example/Art/Polytope Studio
 /[Aa]ssets/Example/Art/UI
+/[Aa]ssets/Plugins/QFSW
+/UserData/Agent/*

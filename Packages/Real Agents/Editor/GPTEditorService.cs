@@ -1,19 +1,16 @@
-using Kurisu.NGDS;
-using Kurisu.NGDS.AI;
+using Kurisu.UniChat.LLMs;
 namespace Kurisu.RealAgents.Editor
 {
-    public class GPTEditorService : IGPTService
+    public class GPTEditorService : IClientService
     {
-        public GPTModel Model => realAgentsSetting.EditorGPTModel;
-        private readonly AITurboSetting aiTurboSetting;
-        private readonly RealAgentsSetting realAgentsSetting;
+        private readonly ILLMSettings llmSetting;
         public GPTEditorService()
         {
-            aiTurboSetting = (realAgentsSetting = RealAgentsSetting.GetOrCreateSettings()).AITurboSetting;
+            llmSetting = RealAgentsSetting.GetOrCreateSettings().LLMSettings;
         }
-        public GPTAgent CreateGPTAgent()
+        public OpenAIClient CreateOpenAIClient()
         {
-            return new GPTAgent(LLMFactory.Create(realAgentsSetting.EditorGPTModel == GPTModel.ChatGPT ? LLMType.ChatGPT : LLMType.ChatGLM, aiTurboSetting));
+            return LLMFactory.Create(LLMType.ChatGPT, llmSetting) as OpenAIClient;
         }
     }
 }

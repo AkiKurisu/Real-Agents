@@ -744,7 +744,7 @@ PlayerSettings:
   webGLPowerPreference: 2
   scriptingDefineSymbols:
     Android: UNITY_PIPELINE_URP;NGD_USE_VITS;NGD_USE_LOCALIZATION
-    Standalone: ODIN_INSPECTOR;ODIN_INSPECTOR_3;ODIN_INSPECTOR_3_1;UNITY_PIPELINE_URP;NGD_USE_VITS
+    Standalone: UNITY_PIPELINE_URP;QC_DISABLE_BUILTIN_ALL
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend: {}

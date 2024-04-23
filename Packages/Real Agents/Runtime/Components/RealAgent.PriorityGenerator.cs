@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Threading;
-using System.Threading.Tasks;
-using Kurisu.NGDS.AI;
+using Cysharp.Threading.Tasks;
+using Kurisu.UniChat.Chains;
+using Kurisu.UniChat.LLMs;
 using Newtonsoft.Json;
 using UnityEngine;
 namespace Kurisu.RealAgents
@@ -13,16 +14,16 @@ namespace Kurisu.RealAgents
         {
             private readonly Template generatePriorityTemplate;
             private readonly RealAgent realAgent;
-            private readonly GPTAgent gptAgent;
+            private readonly OpenAIClient openAIClient;
             private Dictionary<string, float> priorityMap;
             public bool IsRunning { get; private set; }
-            public PriorityGenerator(RealAgent realAgent, GPTAgent gptAgent)
+            public PriorityGenerator(RealAgent realAgent, OpenAIClient openAIClient)
             {
                 this.realAgent = realAgent;
-                this.gptAgent = gptAgent;
+                this.openAIClient = openAIClient;
                 generatePriorityTemplate = new("Generate_Priority");
             }
-            public async Task<bool> StartGenerate(CancellationToken ct)
+            public async UniTask<bool> StartGenerate(CancellationToken ct)
             {
                 //Block when method run
                 if (IsRunning)
@@ -35,7 +36,8 @@ namespace Kurisu.RealAgents
                     {"Purpose",realAgent.Goal}
                 });
                 IsRunning = true;
-                var result = await gptAgent.Inference(input, ct);
+                var chain = Chain.Set(input) | Chain.LLM(openAIClient);
+                string result = await chain.Run("text");
                 Debug.Log(result);
                 try
                 {

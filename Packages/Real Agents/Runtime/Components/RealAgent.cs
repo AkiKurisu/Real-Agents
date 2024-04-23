@@ -4,10 +4,10 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using Kurisu.AkiAI;
 using Kurisu.GOAP;
-using Kurisu.NGDS.AI;
+using Kurisu.UniChat.LLMs;
 using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.AI;
@@ -89,20 +89,6 @@ namespace Kurisu.RealAgents
                 }
             }
         }
-        [SerializeField]
-        private PlanGeneratorMode planGeneratorMode;
-        public PlanGeneratorMode PlanGeneratorMode
-        {
-            get
-            {
-                return planGeneratorMode;
-            }
-            set
-            {
-
-                planGeneratorMode = value;
-            }
-        }
         [SerializeField, TextArea]
         private string goal;
         [SerializeField, Range(0, 30), Tooltip("Interval of discovering plan")]
@@ -129,10 +115,8 @@ namespace Kurisu.RealAgents
         public string Plan { get; set; }
         public string Action { get; set; }
         private StateStopWatch stateStopWatch;
-        private GPTAgent gptAgent;
-        private LangChainAgent langChainAgent;
+        private OpenAIClient openAIClient;
         private CancellationTokenSource ct = new();
-        private SequenceTask sequence;
         public event Action OnAgentUpdate;
         public event Action<string, InferenceContext> OnGeneratePlan;
         private InferenceContext inferenceContext;
@@ -156,10 +140,9 @@ namespace Kurisu.RealAgents
         }
         protected override void OnStart()
         {
-            gptAgent = AgentService.Instance.CreateGPTAgent();
-            langChainAgent = AgentService.Instance.CreateLangChainAgent();
-            planGenerator = new(this, AgentService.Instance.CreateGPTAgent(), AgentService.Instance.CreateLangChainAgent());
-            priorityGenerator = new(this, AgentService.Instance.CreateGPTAgent());
+            openAIClient = ClientService.Instance.CreateOpenAIClient();
+            planGenerator = new(this, ClientService.Instance.CreateOpenAIClient());
+            priorityGenerator = new(this, ClientService.Instance.CreateOpenAIClient());
             Planner.OnUpdate += OnPlannerUpdate;
 
         }
@@ -169,9 +152,7 @@ namespace Kurisu.RealAgents
             switch (aigcMode)
             {
                 case AIGCMode.Discovering:
-                    sequence = new SequenceTask(StartDiscovering)
-                                   .Append(new WaitTask(1f))
-                                   .Run();
+                    StartDiscovering();
                     break;
                 case AIGCMode.Training:
                     StartTraining();
@@ -230,7 +211,7 @@ namespace Kurisu.RealAgents
                 inferenceContext.RecordPlan();
                 //Set goal
                 goal = (planner.ActivateGoal as DescriptiveGoal).SelfDescription;
-                TrainingPipeline();
+                TrainingPipeline().Forget();
             }
         }
 
@@ -284,7 +265,9 @@ namespace Kurisu.RealAgents
         private string GetMemoryPath() => Path.Combine(PathUtil.GetOrCreateAgentFolder(guid), "Memory.json");
         public void SaveMemory()
         {
-            File.WriteAllText(GetMemoryPath(), JsonUtility.ToJson(Memory, true));
+            string path = GetMemoryPath();
+            File.WriteAllText(path, JsonUtility.ToJson(Memory, true));
+            Log($"Memory save to {path}");
         }
         public void LoadMemory()
         {
@@ -299,14 +282,6 @@ namespace Kurisu.RealAgents
             {
                 Memory = new(actions);
             }
-        }
-        public async Task PersistEmbedding()
-        {
-            LogStatus("Call persist embedding...");
-            if (await langChainAgent.Persist(GetMemoryPath(), guid, ct.Token))
-                LogSuccess("Persist embedding succeed!");
-            else
-                LogError("Persist embedding failed!");
         }
         public Dictionary<string, object> GetActionsMemoryMessage()
         {
@@ -350,7 +325,6 @@ namespace Kurisu.RealAgents
         public void StartTraining()
         {
             LogStatus("Waiting planner next result");
-            AbortActiveSequence();
             //Force replan
             Planner.enabled = true;
             waitPlanner = true;
@@ -367,7 +341,7 @@ namespace Kurisu.RealAgents
             Planner.enabled = false;
             //Set flag to discover immediately
             stateStopWatch.StateChanged = true;
-            DiscoveringPipeline();
+            DiscoveringPipeline().Forget();
         }
         public void StopDiscovering()
         {
@@ -383,23 +357,17 @@ namespace Kurisu.RealAgents
             ct.Cancel();
             ct.Dispose();
             ct = new();
-            AbortActiveSequence();
             planRunner.Abort();
             stateStopWatch.StateChanged = false;
             Plan = Action = null;
             OnAgentUpdate?.Invoke();
-        }
-        private void AbortActiveSequence()
-        {
-            sequence?.Abort();
-            sequence = null;
         }
         /// <summary>
         /// Discover plan on input context
         /// </summary>
         /// <param name="evaluateContext"></param>
         /// <returns></returns>
-        private async Task<bool> TryDiscoverPlan(InferenceContext evaluateContext)
+        private async UniTask<bool> TryDiscoverPlan(InferenceContext evaluateContext)
         {
             bool discoverState = await GeneratePlan(evaluateContext);
             if (discoverState)
@@ -419,10 +387,9 @@ namespace Kurisu.RealAgents
             planRunner.Run(evaluateContext.Tasks);
         }
         #region Training Pipeline
-        private async void TrainingPipeline()
+        private async UniTask TrainingPipeline()
         {
             //1. Initialize
-            AbortActiveSequence();
             //* Record states for preventing influence when state changed during discovering
             inferenceContext.RecordStates();
             LogSuccess("Training pipeline start");
@@ -436,19 +403,20 @@ namespace Kurisu.RealAgents
             }
             //3. Evaluate plan
             await EvaluatePlan(inferenceContext);
-            //4. Post process
-            AllocateTrainingSequence();
+            WaitNextTraining().Forget();
         }
-        private void AllocateTrainingSequence()
+        private async UniTask WaitNextTraining()
         {
-            sequence = new SequenceTask(StartTraining).Append(new WaitTask(discoverInterval)).Run();
+            await UniTask.WaitForSeconds(discoverInterval);
+            StartTraining();
         }
         #endregion
         #region  Discovering Pipeline
 
-        private void AllocateDiscoveringSequence()
+        private async UniTask WaitNextDiscovering()
         {
-            sequence = new SequenceTask(DiscoveringPipeline).Append(new WaitTask(discoverInterval)).Run();
+            await UniTask.WaitForSeconds(discoverInterval);
+            DiscoveringPipeline().Forget();
         }
         private bool ValidateCurrentAction()
         {
@@ -463,7 +431,7 @@ namespace Kurisu.RealAgents
         {
             if (!planRunner.IsAbortable)
             {
-                AllocateDiscoveringSequence();
+                WaitNextDiscovering().Forget();
                 return false;
             }
             else
@@ -493,7 +461,7 @@ namespace Kurisu.RealAgents
             if (!stateStopWatch.StateChanged)
             {
                 Log("State not changed, plan discovering was skipped");
-                AllocateDiscoveringSequence();
+                WaitNextDiscovering().Forget();
                 return false;
             }
             return true;
@@ -502,12 +470,11 @@ namespace Kurisu.RealAgents
         /// Pipeline of discovering mode
         /// </summary>
         /// <returns></returns>
-        private async void DiscoveringPipeline()
+        private async UniTask DiscoveringPipeline()
         {
             //1. Initialize
             if (!InitializeDiscoveringPipeline()) return;
             stateStopWatch.StateChanged = false;
-            AbortActiveSequence();
             //* Record states for preventing influence when state changed during discovering
             inferenceContext.RecordStates();
             LogStatus("Discovering pipeline start");
@@ -517,7 +484,7 @@ namespace Kurisu.RealAgents
                 //Set dirty flag to force discover next interval time
                 stateStopWatch.StateChanged = true;
                 LogWarning("Plan discovering failed, discovering pipeline will restart later");
-                AllocateDiscoveringSequence();
+                WaitNextDiscovering().Forget();
                 return;
             }
             //3. Discovering only evaluate preconditions
@@ -525,8 +492,7 @@ namespace Kurisu.RealAgents
             {
                 RunPlan(inferenceContext);
             }
-            //4. Post process
-            AllocateDiscoveringSequence();
+            WaitNextDiscovering().Forget();
         }
         #endregion
 

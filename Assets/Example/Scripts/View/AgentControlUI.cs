@@ -12,8 +12,6 @@ namespace Kurisu.RealAgents.Example.View
         [SerializeField]
         private Dropdown aigcMode;
         [SerializeField]
-        private Dropdown generatorMode;
-        [SerializeField]
         private Button updateGoal;
         [SerializeField]
         private InputField vrmPathInput;
@@ -26,7 +24,6 @@ namespace Kurisu.RealAgents.Example.View
             charaSelectWindow.OnSelect.Register(OnCharaSelect).AttachUnRegister(gameObject);
             updateGoal.onClick.AddListener(UpdateGoal);
             aigcMode.onValueChanged.AddListener(UpdateMode);
-            generatorMode.onValueChanged.AddListener(UpdateGeneratorMode);
             vrmPathInput.onEndEdit.AddListener(x =>
             {
                 if (selectChara)
@@ -36,7 +33,6 @@ namespace Kurisu.RealAgents.Example.View
                 }
             });
             updateGoal.interactable = false;
-            generatorMode.interactable = false;
             aigcMode.interactable = false;
         }
 
@@ -50,12 +46,6 @@ namespace Kurisu.RealAgents.Example.View
             if (selectChara == null) return;
             selectChara.Agent.AIGCMode = (AIGCMode)newMode;
         }
-        private void UpdateGeneratorMode(int newMode)
-        {
-            if (selectChara == null) return;
-            selectChara.Agent.PlanGeneratorMode = (PlanGeneratorMode)newMode;
-        }
-
         private void OnDestroy()
         {
             vrmPathInput.onEndEdit.RemoveAllListeners();
@@ -70,7 +60,6 @@ namespace Kurisu.RealAgents.Example.View
                 selectChara = null;
                 thumb.enabled = false;
                 updateGoal.interactable = false;
-                generatorMode.interactable = false;
                 aigcMode.interactable = false;
                 return;
             }
@@ -81,7 +70,6 @@ namespace Kurisu.RealAgents.Example.View
             aigcMode.value = (int)define.Agent.AIGCMode;
             vrmPathInput.text = define.VrmPath;
             updateGoal.interactable = define.Agent.AIGCMode is AIGCMode.Auxiliary or AIGCMode.Discovering;
-            generatorMode.interactable = define.Agent.AIGCMode > AIGCMode.Auxiliary;
             aigcMode.interactable = true;
         }
     }

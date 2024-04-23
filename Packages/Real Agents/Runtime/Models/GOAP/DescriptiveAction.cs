@@ -2,9 +2,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
+using Cysharp.Threading.Tasks;
 using Kurisu.AkiAI;
 using Kurisu.GOAP;
-using Kurisu.NGDS.AI;
+using Kurisu.UniChat;
 using Newtonsoft.Json;
 using UnityEngine;
 using TaskStatus = Kurisu.AkiAI.TaskStatus;
@@ -20,10 +21,10 @@ namespace Kurisu.RealAgents
         {
             template = null;
         }
-        public async Task DoSelfDescription(GPTAgent agent, CancellationToken ct)
+        public async UniTask DoSelfDescription(ILargeLanguageModel llm, CancellationToken ct)
         {
             template ??= new();
-            selfDescription = await agent.Inference(template.Get(Name, Preconditions, Effects), ct);
+            selfDescription = (await llm.GenerateAsync(template.Get(Name, Preconditions, Effects), ct)).Response;
         }
         public string GetConstraints()
         {

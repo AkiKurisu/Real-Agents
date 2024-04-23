@@ -25,17 +25,4 @@ namespace Kurisu.RealAgents
         Discovering,
 
     }
-    public enum PlanGeneratorMode
-    {
-        /// <summary>
-        /// Iterate last input and result to generate plan
-        /// </summary>
-        [InspectorName("Session Iterative")]
-        Iterative,
-        /// <summary>
-        /// Use vector embedding to generate plan, more slower (required local LangChain server)
-        /// </summary>
-        [InspectorName("Vector Embedding")]
-        Embedding
-    }
 }

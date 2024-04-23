@@ -6,7 +6,7 @@ using UnityEngine;
 namespace Kurisu.RealAgents
 {
     /// <summary>
-    /// Helper component to collect succeed generated plan for text2Vec or few-shot samples
+    /// Helper component to collect succeed generated plan for few-shot samples
     /// </summary>
     [RequireComponent(typeof(RealAgent))]
     public class HistoryAssistant : MonoBehaviour

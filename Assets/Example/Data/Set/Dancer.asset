@@ -35,69 +35,81 @@ MonoBehaviour:
       type: {class: NotHungry, ns: Kurisu.RealAgents.Example, asm: Kurisu.RealAgents.Example}
       data:
         guid: cc08c9f5-f280-4dca-8b1a-62d112186a33
-        selfDescription: 
+        selfDescription: This Goal is used for finding a plan to satisfy the condition
+          of not being hungry.
     - rid: 7882353966743290094
       type: {class: HasEnergy, ns: Kurisu.RealAgents.Example, asm: Kurisu.RealAgents.Example}
       data:
         guid: 07cd36da-6a93-406d-ac71-4af5eef47a58
-        selfDescription: 
+        selfDescription: searching for a plan to perform an action that requires
+          energy.
         energyLossTickTime: 0.4
     - rid: 7882353966743290095
       type: {class: NotThirsty, ns: Kurisu.RealAgents.Example, asm: Kurisu.RealAgents.Example}
       data:
         guid: b7cfb67f-0d31-4ce0-8792-820dac26c39e
-        selfDescription: 
+        selfDescription: This Goal is used for finding a plan to satisfy the agent's
+          thirst.
     - rid: 7882353966743290096
       type: {class: AtWork, ns: Kurisu.RealAgents.Example, asm: Kurisu.RealAgents.Example}
       data:
         guid: 35a3f554-8ccb-40fa-bf0c-a40ce4f7a975
-        selfDescription: 
+        selfDescription: The goal is used for completing work.
     - rid: 7882353966743290097
       type: {class: BeHappy, ns: Kurisu.RealAgents.Example, asm: Kurisu.RealAgents.Example}
       data:
         guid: fe199eac-143e-4666-a3aa-b0dd17b8eaa7
-        selfDescription: 
+        selfDescription: This Goal is used for achieving happiness.
     - rid: 7882353966743290098
       type: {class: Cook, ns: Kurisu.RealAgents.Example, asm: Kurisu.RealAgents.Example}
       data:
         guid: 3823d056-e7e9-48cd-92f3-738c1e75e956
-        selfDescription: 
+        selfDescription: The action "Cook" requires having ingredients but no food,
+          and the effect is that you will have food.
         cookTime: 5
     - rid: 7882353966743290099
       type: {class: Eat, ns: Kurisu.RealAgents.Example, asm: Kurisu.RealAgents.Example}
       data:
         guid: 8f15d82a-4ec8-4b8b-9049-6c59899370c4
-        selfDescription: 
+        selfDescription: The action "Eat" requires you to have food and be hungry.
+          The effect is that you will no longer be hungry.
     - rid: 7882353966743290100
       type: {class: Dance, ns: Kurisu.RealAgents.Example, asm: Kurisu.RealAgents.Example}
       data:
         guid: 9d0013c6-b62d-4459-b394-0df24c39698b
-        selfDescription: 
+        selfDescription: The action "Dance" requires having energy as a condition,
+          and as a result, you will complete your work.
     - rid: 7882353966743290101
       type: {class: RestAtHome, ns: Kurisu.RealAgents.Example, asm: Kurisu.RealAgents.Example}
       data:
         guid: 8c81d0b0-db59-4ca3-a644-1db1e10e715c
-        selfDescription: 
+        selfDescription: The action "RestAtHome" requires you to have no energy,
+          and the effect is that you will have energy afterwards.
         waitTime: 5
     - rid: 7882353966743290102
       type: {class: BuyIngredient, ns: Kurisu.RealAgents.Example, asm: Kurisu.RealAgents.Example}
       data:
         guid: c8a849af-6a12-4e61-a195-63e8a45a6a58
-        selfDescription: 
+        selfDescription: The action "BuyIngredient" requires the merchant to be at
+          work and that you don't already have the ingredients. The effect is that
+          you will have the ingredients.
         buyCount: 5
     - rid: 7882353966743290103
       type: {class: Drink, ns: Kurisu.RealAgents.Example, asm: Kurisu.RealAgents.Example}
       data:
         guid: 964268c9-4136-446e-b78d-c437666b82b3
-        selfDescription: 
+        selfDescription: The action "Drink" requires having water and being thirsty.
+          When you drink, your thirst is satisfied.
     - rid: 7882353966743290104
       type: {class: FetchWater, ns: Kurisu.RealAgents.Example, asm: Kurisu.RealAgents.Example}
       data:
         guid: d2f06114-322d-4401-bdac-be07dc66b7d4
-        selfDescription: 
+        selfDescription: The action "FetchWater" requires you to have energy and
+          not have water. The effect of this action is that you will have water.
         fetchTime: 5
     - rid: 7882353966743290105
       type: {class: TourForest, ns: Kurisu.RealAgents.Example, asm: Kurisu.RealAgents.Example}
       data:
         guid: 6918cc51-38a7-435b-954b-1a1d1595cfb9
-        selfDescription: 
+        selfDescription: The action "TourForest" has no specific conditions. The
+          effect of this action is that the person becomes happy.

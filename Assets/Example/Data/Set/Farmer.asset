@@ -41,99 +41,122 @@ MonoBehaviour:
       type: {class: NotHungry, ns: Kurisu.RealAgents.Example, asm: Kurisu.RealAgents.Example}
       data:
         guid: cc08c9f5-f280-4dca-8b1a-62d112186a33
-        selfDescription: 
+        selfDescription: This Goal is used for finding a plan to satisfy the condition
+          of not being hungry.
     - rid: 7882353966743290126
       type: {class: HasEnergy, ns: Kurisu.RealAgents.Example, asm: Kurisu.RealAgents.Example}
       data:
         guid: 07cd36da-6a93-406d-ac71-4af5eef47a58
-        selfDescription: 
+        selfDescription: searching for a plan to perform an action that requires
+          energy.
         energyLossTickTime: 0.5
     - rid: 7882353966743290127
       type: {class: NotThirsty, ns: Kurisu.RealAgents.Example, asm: Kurisu.RealAgents.Example}
       data:
         guid: 8615822e-6583-4b3b-8862-a5470d81d49a
-        selfDescription: 
+        selfDescription: This Goal is used for finding a plan to satisfy the agent's
+          thirst.
     - rid: 7882353966743290128
       type: {class: AtWork, ns: Kurisu.RealAgents.Example, asm: Kurisu.RealAgents.Example}
       data:
         guid: f41e0f81-acf0-4e80-b3e9-83ebee5b75b0
-        selfDescription: 
+        selfDescription: The goal is used for completing work.
     - rid: 7882353966743290129
       type: {class: BeHappy, ns: Kurisu.RealAgents.Example, asm: Kurisu.RealAgents.Example}
       data:
         guid: 4eb2e9a7-c39c-4bea-8363-a8ece96bbe76
-        selfDescription: 
+        selfDescription: This Goal is used for achieving happiness.
     - rid: 7882353966743290130
       type: {class: Cook, ns: Kurisu.RealAgents.Example, asm: Kurisu.RealAgents.Example}
       data:
         guid: 3823d056-e7e9-48cd-92f3-738c1e75e956
-        selfDescription: 
+        selfDescription: The action "Cook" requires having ingredients but no food,
+          and the effect is that you will have food.
         cookTime: 5
     - rid: 7882353966743290131
       type: {class: Eat, ns: Kurisu.RealAgents.Example, asm: Kurisu.RealAgents.Example}
       data:
         guid: 8f15d82a-4ec8-4b8b-9049-6c59899370c4
-        selfDescription: 
+        selfDescription: The action "Eat" requires you to have food and be hungry.
+          The effect is that you will no longer be hungry.
     - rid: 7882353966743290132
       type: {class: BuyIngredient, ns: Kurisu.RealAgents.Example, asm: Kurisu.RealAgents.Example}
       data:
         guid: 19830e9d-aafa-4cf4-aeda-66e3b9e213aa
-        selfDescription: 
+        selfDescription: The action "BuyIngredient" requires the merchant to be at
+          work and that you don't already have the ingredients. The effect is that
+          you will have the ingredients.
         buyCount: 5
     - rid: 7882353966743290133
       type: {class: RestAtHome, ns: Kurisu.RealAgents.Example, asm: Kurisu.RealAgents.Example}
       data:
         guid: a6d2ba25-beb8-49f5-9fbb-50f57d263a15
-        selfDescription: 
+        selfDescription: The action "RestAtHome" requires you to have no energy,
+          and the effect is that you will have energy afterwards.
         waitTime: 5
     - rid: 7882353966743290134
       type: {class: FollowTarget, ns: Kurisu.RealAgents.Example, asm: Kurisu.RealAgents.Example}
       data:
         guid: 832657af-0dcd-4744-9be5-7febcb8a6460
-        selfDescription: 
+        selfDescription: The action "FollowTarget" requires you to have energy and
+          be not in distance, and the effect is that you will be in distance.
     - rid: 7882353966743290135
       type: {class: Drink, ns: Kurisu.RealAgents.Example, asm: Kurisu.RealAgents.Example}
       data:
         guid: cab54064-d4ce-41fe-8269-82801507fcaa
-        selfDescription: 
+        selfDescription: The action "Drink" requires having water and being thirsty.
+          When you drink, your thirst is satisfied.
     - rid: 7882353966743290136
       type: {class: FetchWater, ns: Kurisu.RealAgents.Example, asm: Kurisu.RealAgents.Example}
       data:
         guid: d9b78840-52cf-456d-99b1-eb0517ad4a91
-        selfDescription: 
+        selfDescription: The action "FetchWater" requires you to have energy and
+          not have water. The effect of this action is that you will have water.
         fetchTime: 5
     - rid: 7882353966743290137
       type: {class: Feed, ns: Kurisu.RealAgents.Example, asm: Kurisu.RealAgents.Example}
       data:
         guid: 2fed0ea2-0dd8-4736-ae9c-0cdb09c2a556
-        selfDescription: 
+        selfDescription: The action "Feed" requires you to have energy, be within
+          distance, have food, and the target being hungry. The effect of this action
+          is that the target is no longer hungry.
     - rid: 7882353966743290138
       type: {class: PickVegetable, ns: Kurisu.RealAgents.Example, asm: Kurisu.RealAgents.Example}
       data:
         guid: f6f11660-3cea-44e9-8c1d-976c2574a9cd
-        selfDescription: 
+        selfDescription: The action "PickVegetable" requires you to have energy,
+          and as a result, you will complete the work.
     - rid: 7882353966743290139
       type: {class: Idle, ns: Kurisu.RealAgents.Example, asm: Kurisu.RealAgents.Example}
       data:
         guid: 4284fb57-cd26-46dd-9195-12c656b4e462
-        selfDescription: 
+        selfDescription: The action "Idle" requires you to not be idle, be in close
+          proximity, and have energy. If these conditions are met, the effect is
+          that you become idle.
     - rid: 7882353966743290140
       type: {class: IdleFrontOfTarget, ns: Kurisu.RealAgents.Example, asm: Kurisu.RealAgents.Example}
       data:
         guid: 5817e073-a042-43f6-81a0-2bf9539bad58
-        selfDescription: 
+        selfDescription: The action "IdleFrontOfTarget" requires the target to be
+          working, you not being idle, being in distance, and having energy. The
+          effect is that you become idle.
     - rid: 7882353966743290141
       type: {class: SetDancerAsTarget, ns: Kurisu.RealAgents.Example, asm: Kurisu.RealAgents.Example}
       data:
         guid: 46663031-3025-4748-a2d9-96acf37f6061
-        selfDescription: 
+        selfDescription: The action "SetDancerAsTarget" requires the condition that
+          the target is not already a dancer. The effect of this action is that the
+          target becomes a dancer.
     - rid: 7882353966743290142
       type: {class: WatchingDance, ns: Kurisu.RealAgents.Example, asm: Kurisu.RealAgents.Example}
       data:
         guid: 1c46057a-a6fb-49b9-9ae3-e5fac97c2baf
-        selfDescription: 
+        selfDescription: The action "WatchingDance" requires the dancer to be at
+          work, the target to be a dancer, and for you to be idle. As a result, you
+          will feel happy.
     - rid: 7882353966743290143
       type: {class: TourForest, ns: Kurisu.RealAgents.Example, asm: Kurisu.RealAgents.Example}
       data:
         guid: c20f81e1-b3d9-4423-9407-43665a311421
-        selfDescription: 
+        selfDescription: The action "TourForest" has no specific conditions. The
+          effect of this action is that the person becomes happy.

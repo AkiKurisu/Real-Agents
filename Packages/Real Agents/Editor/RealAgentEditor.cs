@@ -43,10 +43,6 @@ namespace Kurisu.RealAgents.Editor
             {
                 Agent.AIGCMode = (AIGCMode)EditorGUILayout.EnumPopup(new GUIContent("AIGC Mode"), Agent.AIGCMode);
             }
-            if (Agent.AIGCMode > AIGCMode.Procedural)
-            {
-                EditorGUILayout.PropertyField(serializedObject.FindProperty("planGeneratorMode"), new GUIContent("PlanGenerator Mode"));
-            }
             if (EditorGUI.EndChangeCheck()) serializedObject.ApplyModifiedProperties();
             GUILayout.Label("AI Status       " + (Agent.enabled ?
             (Agent.IsAIEnabled ? "<color=#92F2FF>Running</color>" : "<color=#FFF892>Pending</color>")
@@ -107,10 +103,6 @@ namespace Kurisu.RealAgents.Editor
                 {
                     Agent.SaveMemory();
                 }
-                if (GUILayout.Button("Persist Embedding"))
-                {
-                    PersistEmbedding();
-                }
             }
             else
             {
@@ -126,10 +118,6 @@ namespace Kurisu.RealAgents.Editor
                 }
                 GUI.backgroundColor = color;
             }
-        }
-        private async void PersistEmbedding()
-        {
-            await Agent.PersistEmbedding(); ;
         }
         private RealAgentSet GetSet()
         {

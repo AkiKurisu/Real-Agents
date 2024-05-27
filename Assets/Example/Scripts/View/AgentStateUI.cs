@@ -1,4 +1,5 @@
 using Kurisu.Framework;
+using Kurisu.Framework.React;
 using TMPro;
 using UnityEngine;
 namespace Kurisu.RealAgents.Example.View
@@ -24,10 +25,10 @@ namespace Kurisu.RealAgents.Example.View
             parentRect = transform.parent.GetComponent<RectTransform>();
             rectTransform = GetComponent<RectTransform>();
             realAgent.OnAgentUpdate += UpdateUI;
-            realAgent.GetComponent<CharaDefine>().OnCharaLoad.Register(() =>
+            realAgent.GetComponent<CharaDefine>().OnCharaLoad.Subscribe(_ =>
             {
                 sr = realAgent.GetComponentInChildren<SkinnedMeshRenderer>();
-            }).AttachUnRegister(gameObject);
+            }).AddTo(gameObject);
         }
         private void Update()
         {
@@ -35,7 +36,7 @@ namespace Kurisu.RealAgents.Example.View
             {
                 bool isShown = (mainCamera.transform.position - realAgent.transform.position).sqrMagnitude < 100 && sr.isVisible;
                 if (isShown)
-                    rectTransform.anchoredPosition = AkiMethod.GetScreenPosition(mainCamera, parentRect.sizeDelta.x, parentRect.sizeDelta.y, realAgent.Transform.position + Vector3.up * 2f);
+                    rectTransform.anchoredPosition = Utils.GetScreenPosition(mainCamera, parentRect.sizeDelta.x, parentRect.sizeDelta.y, realAgent.Transform.position + Vector3.up * 2f);
                 canvasGroup.alpha = Mathf.Lerp(canvasGroup.alpha, isShown ? 1 : 0, Time.deltaTime * 5);
             }
         }

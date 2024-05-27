@@ -1,4 +1,3 @@
-using Kurisu.Framework.Utility.ManagedObjects;
 namespace Kurisu.Framework.UGUI
 {
     public abstract class UIScriptableEvent : ManagedObject

@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Kurisu.Framework.Utility;
+using Kurisu.Framework;
 using UnityEngine;
 namespace Kurisu.RealAgents.Example
 {

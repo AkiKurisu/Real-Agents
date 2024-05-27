@@ -41,9 +41,9 @@
       "depth": 0,
       "source": "git",
       "dependencies": {
-        "com.unity.addressables": "1.19.19"
+        "com.unity.nuget.newtonsoft-json": "3.2.1"
       },
-      "hash": "1d69857857055282bd55886ecef4887356543d7f"
+      "hash": "fd69599bc6798c9da8ec05476c87b371cac74b1e"
     },
     "com.kurisu.akigoap": {
       "version": "https://github.com/AkiKurisu/AkiGOAP.git",
@@ -77,7 +77,7 @@
         "com.huggingface.sharp-transformers": "0.0.1",
         "com.cysharp.unitask": "2.5.3"
       },
-      "hash": "02b837fed9b2d3c7f683b34078306bbbb4f67d5a"
+      "hash": "274894cc56be8e5dc80daf38631108135fefa4c8"
     },
     "com.unity.addressables": {
       "version": "1.21.20",

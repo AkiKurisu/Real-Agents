@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using Kurisu.Framework;
+using Kurisu.Framework.React;
 using Kurisu.GOAP;
 using UnityEngine;
 namespace Kurisu.RealAgents.Example
@@ -30,7 +31,7 @@ namespace Kurisu.RealAgents.Example
         {
             charas.Add(charaDefine);
             charaCount++;
-            charaDefine.OnCharaLoad.RegisterOnce(() => OnCharaLoad(charaDefine));
+            charaDefine.OnCharaLoad.Take(1).Subscribe((e) => OnCharaLoad(charaDefine)).AddTo(charaDefine);
         }
         public bool TryGetChara(string agentID, out CharaDefine charaDefine)
         {

@@ -7,6 +7,7 @@ namespace Kurisu.RealAgents
     public class ClientService : SingletonService<ClientService>, IClientService
     {
         private readonly LLMSettings setting = new();
+        private LLMFactory factory;
         public string BaseUrl
         {
             get => setting.OpenAI_API_URL;
@@ -17,9 +18,14 @@ namespace Kurisu.RealAgents
             get => setting.OpenAIKey;
             set => setting.OpenAIKey = value;
         }
+        protected override void Awake()
+        {
+            base.Awake();
+            factory = new LLMFactory(setting);
+        }
         public OpenAIClient CreateOpenAIClient()
         {
-            return LLMFactory.Create(LLMType.ChatGPT, setting) as OpenAIClient;
+            return factory.CreateLLM(LLMType.OpenAI) as OpenAIClient;
         }
     }
 }

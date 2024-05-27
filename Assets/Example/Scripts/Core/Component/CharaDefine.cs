@@ -1,8 +1,8 @@
 using System.IO;
+using Cysharp.Threading.Tasks;
 using Kurisu.AkiAI;
 using Kurisu.AkiBT;
-using Kurisu.Framework;
-using Kurisu.Framework.Tasks;
+using Kurisu.Framework.React;
 using Kurisu.Framework.VRM;
 using Kurisu.GOAP;
 using UnityEngine;
@@ -43,7 +43,8 @@ namespace Kurisu.RealAgents.Example
             CharaManager.Instance.Register(this);
         }
         private string GetVrmPath(string relativePath) => $"{PathDefine.VRMPath}/{relativePath}";
-        private async void Start()
+#pragma warning disable UNT0006,IDE0051
+        private async UniTaskVoid Start()
         {
             var instance = await VRMSpawnSystem.LoadVRMAsync(GetVrmPath(VrmPath), transform);
             instance.transform.localScale = Vector3.one;
@@ -64,16 +65,15 @@ namespace Kurisu.RealAgents.Example
             OnCharaLoad.Trigger();
             Agent.enabled = true;
             Planner.enabled = true;
-            Task.Schedule(() =>
+            await UniTask.WaitForSeconds(0.5f);
+            var instanceAnimator = instance.GetComponent<Animator>();
+            animator.avatar = instanceAnimator.avatar;
+            foreach (var render in renders)
             {
-                var instanceAnimator = instance.GetComponent<Animator>();
-                animator.avatar = instanceAnimator.avatar;
-                foreach (var render in renders)
-                {
-                    render.enabled = true;
-                }
-                Destroy(instanceAnimator);
-            }, 0.5f);
+                render.enabled = true;
+            }
+            Destroy(instanceAnimator);
         }
+#pragma warning restore UNT0006
     }
 }

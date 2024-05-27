@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using Kurisu.Framework;
+using Kurisu.Framework.React;
 using UnityEngine;
 using UnityEngine.UI;
 namespace Kurisu.RealAgents.Example.View
@@ -16,7 +16,7 @@ namespace Kurisu.RealAgents.Example.View
         public AkiEvent<CharaDefine> OnSelect { get; } = new();
         private void Awake()
         {
-            CharaManager.Instance.OnRefresh.Register(Refresh).AttachUnRegister(gameObject);
+            CharaManager.Instance.OnRefresh.Subscribe(Refresh).AddTo(gameObject);
         }
 
         private void Refresh()
@@ -31,9 +31,9 @@ namespace Kurisu.RealAgents.Example.View
                 var instanceSlot = Instantiate(charaSelectSlot, content);
                 instanceSlot.Setup(chara);
                 var unRegister = instanceSlot.gameObject.GetUnRegister();
-                instanceSlot.OnClick.Register(OnCharaSelect).AttachUnRegister(unRegister);
-                instanceSlot.OnPointerEnter.Register(OnCharaEnter).AttachUnRegister(unRegister);
-                instanceSlot.OnPointerExist.Register(OnCharaExist).AttachUnRegister(unRegister);
+                instanceSlot.OnClick.Subscribe(OnCharaSelect).AddTo(unRegister);
+                instanceSlot.OnPointerEnter.Subscribe(OnCharaEnter).AddTo(unRegister);
+                instanceSlot.OnPointerExist.Subscribe(OnCharaExist).AddTo(unRegister);
             }
         }
 

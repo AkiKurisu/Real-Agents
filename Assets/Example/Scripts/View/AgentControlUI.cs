@@ -1,4 +1,4 @@
-using Kurisu.Framework;
+using Kurisu.Framework.React;
 using UnityEngine;
 using UnityEngine.UI;
 namespace Kurisu.RealAgents.Example.View
@@ -21,22 +21,23 @@ namespace Kurisu.RealAgents.Example.View
         private void Awake()
         {
             thumb.enabled = false;
-            charaSelectWindow.OnSelect.Register(OnCharaSelect).AttachUnRegister(gameObject);
-            updateGoal.onClick.AddListener(UpdateGoal);
-            aigcMode.onValueChanged.AddListener(UpdateMode);
-            vrmPathInput.onEndEdit.AddListener(x =>
+            var unRegister = gameObject.GetUnRegister();
+            charaSelectWindow.OnSelect.Subscribe(OnCharaSelect).AddTo(unRegister);
+            updateGoal.onClick.AsObservable().Subscribe(UpdateGoal).AddTo(unRegister);
+            aigcMode.onValueChanged.AsObservable().Subscribe(UpdateMode).AddTo(unRegister);
+            vrmPathInput.onEndEdit.AsObservable().Subscribe(x =>
             {
                 if (selectChara)
                 {
                     ConfigEntry.Instance.SetPath(selectChara.AgentID, x);
                     ConfigEntry.SaveConfig();
                 }
-            });
+            }).AddTo(unRegister);
             updateGoal.interactable = false;
             aigcMode.interactable = false;
         }
 
-        private void UpdateGoal()
+        private void UpdateGoal(Unit _)
         {
             if (selectChara == null) return;
             selectChara.Agent.Goal = goalInput.text;
@@ -46,13 +47,6 @@ namespace Kurisu.RealAgents.Example.View
             if (selectChara == null) return;
             selectChara.Agent.AIGCMode = (AIGCMode)newMode;
         }
-        private void OnDestroy()
-        {
-            vrmPathInput.onEndEdit.RemoveAllListeners();
-            aigcMode.onValueChanged.RemoveAllListeners();
-            updateGoal.onClick.RemoveAllListeners();
-        }
-
         private void OnCharaSelect(CharaDefine define)
         {
             if (selectChara == define)

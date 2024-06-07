@@ -2,6 +2,7 @@ using Kurisu.Framework;
 using Kurisu.Framework.React;
 using TMPro;
 using UnityEngine;
+using R3;
 namespace Kurisu.RealAgents.Example.View
 {
     [RequireComponent(typeof(CanvasGroup))]

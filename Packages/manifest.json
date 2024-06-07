@@ -4,7 +4,6 @@
     "com.huggingface.sharp-transformers": "https://github.com/AkiKurisu/sharp-transformers.git",
     "com.kurisu.akiai": "https://github.com/AkiKurisu/AkiAI.git",
     "com.kurisu.akibt": "https://github.com/AkiKurisu/AkiBT.git",
-    "com.kurisu.akiframework": "https://github.com/AkiKurisu/AkiFramework.git",
     "com.kurisu.akigoap": "https://github.com/AkiKurisu/AkiGOAP.git",
     "com.kurisu.unichat": "https://github.com/AkiKurisu/UniChat.git",
     "com.unity.addressables": "1.21.20",

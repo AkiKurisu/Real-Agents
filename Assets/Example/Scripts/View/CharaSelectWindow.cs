@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Kurisu.Framework.React;
+using R3;
 using UnityEngine;
 using UnityEngine.UI;
 namespace Kurisu.RealAgents.Example.View
@@ -13,13 +14,13 @@ namespace Kurisu.RealAgents.Example.View
         [SerializeField]
         private CharaSelectSlot charaSelectSlot;
         private readonly HashSet<CharaSelectSlot> slots = new();
-        public AkiEvent<CharaDefine> OnSelect { get; } = new();
+        public Subject<CharaDefine> OnSelect { get; } = new();
         private void Awake()
         {
             CharaManager.Instance.OnRefresh.Subscribe(Refresh).AddTo(gameObject);
         }
 
-        private void Refresh()
+        private void Refresh(Unit _)
         {
             var charas = CharaManager.Instance.GetCharas();
             foreach (var slot in slots)
@@ -44,7 +45,7 @@ namespace Kurisu.RealAgents.Example.View
 
         private void OnCharaSelect(CharaDefine charaDefine)
         {
-            OnSelect.Trigger(charaDefine);
+            OnSelect.OnNext(charaDefine);
         }
         private void OnCharaEnter(CharaDefine charaDefine)
         {

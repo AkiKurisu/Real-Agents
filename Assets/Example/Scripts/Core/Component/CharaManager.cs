@@ -3,6 +3,7 @@ using System.Linq;
 using Kurisu.Framework;
 using Kurisu.Framework.React;
 using Kurisu.GOAP;
+using R3;
 using UnityEngine;
 namespace Kurisu.RealAgents.Example
 {
@@ -17,7 +18,7 @@ namespace Kurisu.RealAgents.Example
         private GOAPStateSet globalState;
         private readonly HashSet<CharaDefine> charas = new();
         private int charaCount;
-        public AkiEvent OnRefresh { get; } = new();
+        public Subject<Unit> OnRefresh { get; } = new();
         protected override void Awake()
         {
             base.Awake();
@@ -50,7 +51,7 @@ namespace Kurisu.RealAgents.Example
         {
             charaDefine.GetComponent<WorldState>().GlobalState = globalState;
             charaCount--;
-            if (charaCount == 0) OnRefresh.Trigger();
+            if (charaCount == 0) OnRefresh.OnNext(Unit.Default);
         }
     }
 }

@@ -34,16 +34,15 @@
       "dependencies": {
         "com.unity.nuget.newtonsoft-json": "3.2.1"
       },
-      "hash": "9d013563b7e2a4c4f52e4e736dcd05ec739324b6"
+      "hash": "fe34111aff606f96d1e61e40e7251053fc7f3a37"
     },
     "com.kurisu.akiframework": {
-      "version": "https://github.com/AkiKurisu/AkiFramework.git",
+      "version": "file:AkiFramework",
       "depth": 0,
-      "source": "git",
+      "source": "embedded",
       "dependencies": {
         "com.unity.nuget.newtonsoft-json": "3.2.1"
-      },
-      "hash": "fd69599bc6798c9da8ec05476c87b371cac74b1e"
+      }
     },
     "com.kurisu.akigoap": {
       "version": "https://github.com/AkiKurisu/AkiGOAP.git",

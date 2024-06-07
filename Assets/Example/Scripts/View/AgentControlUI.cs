@@ -1,4 +1,5 @@
 using Kurisu.Framework.React;
+using R3;
 using UnityEngine;
 using UnityEngine.UI;
 namespace Kurisu.RealAgents.Example.View

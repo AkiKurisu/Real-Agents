@@ -2,9 +2,9 @@ using System.IO;
 using Cysharp.Threading.Tasks;
 using Kurisu.AkiAI;
 using Kurisu.AkiBT;
-using Kurisu.Framework.React;
 using Kurisu.Framework.VRM;
 using Kurisu.GOAP;
+using R3;
 using UnityEngine;
 using UniVRM10;
 namespace Kurisu.RealAgents.Example
@@ -18,7 +18,7 @@ namespace Kurisu.RealAgents.Example
         private string presetPath;
         public string VrmPath { get; private set; }
         private Animator animator;
-        public AkiEvent OnCharaLoad { get; } = new();
+        public Subject<Unit> OnCharaLoad { get; } = new();
         public string CharaName { get; private set; }
         public Texture2D Thumbnail { get; private set; }
         public RealAgent Agent { get; private set; }
@@ -62,7 +62,7 @@ namespace Kurisu.RealAgents.Example
             Thumbnail = meta.Thumbnail;
             var entrance = GetComponent<AIBlackBoard>().GetObject<Transform>(Variables.HomeEntrance);
             transform.SetPositionAndRotation(entrance.position, entrance.rotation);
-            OnCharaLoad.Trigger();
+            OnCharaLoad.OnNext(Unit.Default);
             Agent.enabled = true;
             Planner.enabled = true;
             await UniTask.WaitForSeconds(0.5f);

@@ -1,5 +1,4 @@
-using Kurisu.Framework;
-using Kurisu.Framework.React;
+using R3;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -7,9 +6,9 @@ namespace Kurisu.RealAgents.Example.View
 {
     public class CharaSelectSlot : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
     {
-        public AkiEvent<CharaDefine> OnPointerEnter { get; } = new();
-        public AkiEvent<CharaDefine> OnPointerExist { get; } = new();
-        public AkiEvent<CharaDefine> OnClick { get; } = new();
+        public Subject<CharaDefine> OnPointerEnter { get; } = new();
+        public Subject<CharaDefine> OnPointerExist { get; } = new();
+        public Subject<CharaDefine> OnClick { get; } = new();
         private CharaDefine charaDefine;
         [SerializeField]
         private RawImage thumb;
@@ -20,17 +19,17 @@ namespace Kurisu.RealAgents.Example.View
         }
         void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
         {
-            OnClick.Trigger(charaDefine);
+            OnClick.OnNext(charaDefine);
         }
 
         void IPointerEnterHandler.OnPointerEnter(PointerEventData eventData)
         {
-            OnPointerEnter.Trigger(charaDefine);
+            OnPointerEnter.OnNext(charaDefine);
         }
 
         void IPointerExitHandler.OnPointerExit(PointerEventData eventData)
         {
-            OnPointerExist.Trigger(charaDefine);
+            OnPointerExist.OnNext(charaDefine);
         }
     }
 }

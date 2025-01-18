@@ -1,0 +1,37 @@
+{
+  "name": "com.kurisu.akibt",
+  "displayName": "AkiBT",
+  "version": "1.4.3",
+  "unity": "2021.3",
+  "description": "Node based Behavior Tree Editor.\nSupports visualizing active node in runtime.\nEasily add original behaviors.",
+  "keywords": [
+    "Graph",
+    "GraphView",
+    "BehaviorTree",
+    "AI"
+  ],
+  "category": "Visual Scripting",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AkiKurisu/AkiBT.git"
+  },
+  "dependencies": {
+    "com.unity.nuget.newtonsoft-json": "3.2.1"
+  },
+  "author": {
+    "name": "AkiKurisu",
+    "url": "https://github.com/AkiKurisu"
+  },
+  "samples": [
+    {
+      "displayName": "AI Example",
+      "description": "Contains sample behaviorTree for AI",
+      "path": "Samples~/Example"
+    },
+    {
+      "displayName": "Builder Example",
+      "description": "Contains sample builder for BehaviorTreeBuilder",
+      "path": "Samples~/Builder Example"
+    }
+  ]
+}

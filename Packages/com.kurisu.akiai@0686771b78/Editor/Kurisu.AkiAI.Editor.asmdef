@@ -1,0 +1,22 @@
+{
+    "name": "Kurisu.AkiAI.Editor",
+    "rootNamespace": "Kurisu.AkiAI.Editor",
+    "references": [
+        "GUID:9468b0f290541f649a4b8e65539d0f47",
+        "GUID:bf89a8bf6625fad4eb6879c01e73541d",
+        "GUID:f107c6017d59d64439a1cf5a67861cd3",
+        "GUID:db4e6cb5298e31f4ba47e950b4da77c7",
+        "GUID:41ce47af1d69c28458bf06fdc18c263d"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

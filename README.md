@@ -2,8 +2,6 @@
 
 # Real Agents
 
-[中文](README_zh.md) | [English](README.md)
-
 Real Agents is a planning framework that combines traditional artificial intelligence methods with Large Language Models (LLM) and is suitable for generative AI agents. It includes a Unity plug-in and demonstration project.
 
 > The reason for the development of this project is to complete my undergraduate thesis (design) and my personal interest in game AI.
@@ -181,12 +179,10 @@ AkiFramework is under MIT license.
 ## Quote this repository
 ```
 @misc{realagents,
-  author = {YiFei Feng},
   title = {Real Agents: An planning framework for generative artificial intelligence agents},
   year = {2024},
   publisher = {GitHub},
   journal = {https://github.com/AkiKurisu/Real-Agents},
-  school = {East China University of Political Science and Law},
   location = {Shanghai, China}
 }
 ```

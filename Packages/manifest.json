@@ -1,11 +1,6 @@
 {
   "dependencies": {
     "com.cysharp.unitask": "https://github.com/Cysharp/UniTask.git?path=src/UniTask/Assets/Plugins/UniTask",
-    "com.huggingface.sharp-transformers": "https://github.com/AkiKurisu/sharp-transformers.git",
-    "com.kurisu.akiai": "https://github.com/AkiKurisu/AkiAI.git",
-    "com.kurisu.akibt": "https://github.com/AkiKurisu/AkiBT.git",
-    "com.kurisu.akigoap": "https://github.com/AkiKurisu/AkiGOAP.git",
-    "com.kurisu.unichat": "https://github.com/AkiKurisu/UniChat.git",
     "com.unity.addressables": "1.21.20",
     "com.unity.ai.navigation": "1.1.5",
     "com.unity.burst": "1.8.13",

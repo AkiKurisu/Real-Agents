@@ -1,0 +1,25 @@
+{
+  "name": "com.kurisu.akiai",
+  "displayName": "AkiAI",
+  "version": "1.0.0",
+  "unity": "2021.3",
+  "description": "A personal and experimental game AI framework that can be used to design and develop NPCs and enemy AI in games, etc.",
+  "keywords": [
+    "Framework",
+    "AI"
+  ],
+  "category": "Visual Scripting",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/AkiKurisu/AkiAI.git"
+  },
+  "dependencies": {
+    "com.unity.nuget.newtonsoft-json": "3.2.1",
+    "com.kurisu.akibt": "1.4.2",
+    "com.kurisu.akigoap": "1.1.1"
+  },
+  "author": {
+    "name": "AkiKurisu",
+    "url": "https://github.com/AkiKurisu"
+  }
+}
